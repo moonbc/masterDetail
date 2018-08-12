@@ -7,19 +7,29 @@
 //
 
 import UIKit
+import WebKit
 
 class DetailViewController: UIViewController {
-
+    @IBOutlet weak var webView: WKWebView!
+    
     @IBOutlet weak var detailDescriptionLabel: UILabel!
+    
+    //상위 뷰 컨트롤러에서 데이터를 받을 변수 선언
+    var addr:String?
+    
+    
 
 
     func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                label.text = detail.description
+
+            //webSiterk nil이 아닐때만 동작
+            if let address = addr{
+                let webURL = URL(string: address)
+                let urlRequest = URLRequest(url: webURL!)
+                
+                webView.load(urlRequest)
             }
-        }
+
     }
 
     override func viewDidLoad() {
